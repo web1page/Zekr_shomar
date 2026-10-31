@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#174b3a">
+<meta name="description" content="صلوات و ذکر شمار سنتی ایرانی با ذخیره خودکار، هدف‌گذاری و نصب به‌صورت برنامه وب">
+
+<title>صلوات و ذکر شمار | یاد خدا</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');
+:root{--green:#174b3a;--green2:#23634b;--gold:#c6a45b;--cream:#f7f1e4;--ink:#26352d;--muted:#718075}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Vazirmatn,Tahoma,sans-serif;color:var(--ink);background:radial-gradient(circle at 50% 0,#fff9eb 0,#eee4ce 58%,#e4d8bd 100%);padding:22px 14px;display:flex;justify-content:center;align-items:center}
+.shell{width:min(100%,560px);position:relative;background:rgba(255,252,244,.94);border:1px solid #d8c69e;border-radius:28px;box-shadow:0 18px 55px #493b241c;overflow:hidden}
+.shell:before{content:"";position:absolute;inset:9px;border:1px solid #c7aa6a;border-radius:21px;pointer-events:none}
+.top{background:var(--green);color:#fff;text-align:center;padding:28px 22px 24px;position:relative}
+.top:after{content:"✦  ❖  ✦";display:block;color:#e4c77d;letter-spacing:8px;margin-top:12px;font-size:14px}
+.kicker{font-size:12px;color:#e8d7ad;letter-spacing:.3px}.top h1{margin:7px 0 2px;font-size:clamp(25px,6vw,34px);font-weight:800}.sub{font-size:13px;color:#e1eadf}
+.content{padding:25px clamp(18px,5vw,34px) 30px}
+.credit{text-align:center;color:#8c6b32;font-size:13px;font-weight:700;margin:0 0 20px}
+.counter-card{background:linear-gradient(145deg,#fffdf7,#f5edda);border:1px solid #e1d2ad;border-radius:22px;padding:23px 16px 20px;text-align:center;box-shadow:inset 0 1px #fff}
+.label{font-size:13px;color:var(--muted)}.count{font-size:clamp(54px,14vw,82px);line-height:1.3;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums;direction:ltr}
+.goal-line{display:flex;justify-content:center;gap:7px;align-items:center;font-size:13px;color:#7b705d;margin:4px 0 15px}
+.progress{height:9px;background:#e7dfcd;border-radius:20px;overflow:hidden;max-width:330px;margin:0 auto}.bar{height:100%;width:0;background:linear-gradient(90deg,#b18b42,#e0c47e);border-radius:20px;transition:width .25s}
+.progress-text{font-size:11px;color:#8c826e;margin-top:7px}
+.tap{margin:22px auto 13px;width:min(58vw,190px);aspect-ratio:1;border-radius:50%;border:7px solid #d8c18a;background:radial-gradient(circle at 35% 28%,#34795d,#174b3a 72%);color:white;box-shadow:0 9px 0 #a98a4d,0 14px 24px #174b3a30,inset 0 2px 7px #ffffff45;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;transition:transform .08s,filter .2s;user-select:none;-webkit-tap-highlight-color:transparent}
+.tap:active{transform:translateY(5px);box-shadow:0 4px 0 #a98a4d,inset 0 2px 7px #ffffff45}.tap strong{font-size:25px}.tap span{font-size:11px;color:#e7d9b7;margin-top:3px}
+.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:17px}
+button,select,input{font:inherit} .btn{border:1px solid #d9cba9;border-radius:13px;background:#fffaf0;color:var(--green);padding:11px 8px;font-size:13px;font-weight:700;cursor:pointer;transition:.15s}
+.btn:active{transform:scale(.97)}.btn.primary{background:var(--green);border-color:var(--green);color:white}.btn.danger{color:#a44c3d}.btn:focus-visible,.tap:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #d3ad59;outline-offset:3px}
+.settings{margin-top:23px;border-top:1px dashed #d8c69e;padding-top:19px}
+.section-title{font-size:14px;font-weight:800;color:var(--green);margin:0 0 12px}
+.goal-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.goal-btn{border:1px solid #d8c69e;background:#fffaf0;color:#655a43;border-radius:12px;padding:10px 4px;font-weight:700;cursor:pointer;font-size:13px}.goal-btn.active{background:#e8efdf;border-color:var(--green2);color:var(--green)}
+.custom{display:flex;gap:8px;margin-top:9px}.custom input{min-width:0;flex:1;border:1px solid #d8c69e;border-radius:11px;background:#fffdf8;padding:10px 12px;color:var(--ink);font-size:13px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px}.stat{background:#f5efdf;border-radius:13px;padding:11px;text-align:center}.stat b{display:block;color:var(--green);font-size:20px}.stat span{font-size:11px;color:#827761}
+.footer{text-align:center;color:#9b8d70;font-size:10px;margin-top:22px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:#183f32;color:white;padding:10px 16px;border-radius:30px;font-size:12px;opacity:0;pointer-events:none;transition:.25s;white-space:nowrap;z-index:5}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:390px){body{padding:8px}.shell{border-radius:22px}.content{padding:20px 15px 24px}.controls{gap:6px}.btn{font-size:12px;padding:10px 4px}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <header class="top">
+    <div class="kicker">ذِکر و آرامش</div>
+    <h1>صلوات و ذکر شمار</h1>
+    <div class="sub">اللّهُمَّ صَلِّ عَلَی مُحَمَّدٍ وَ آلِ مُحَمَّد</div>
+  </header>
+  <section class="content">
+    <p class="credit">تقدیم از طرف کیارش</p>
+    <div class="counter-card">
+      <div class="label">تعداد صلوات‌های ثبت‌شده</div>
+      <div class="count" id="count" aria-live="polite">۰</div>
+      <div class="goal-line"><span>هدف این نوبت:</span><b id="goalLabel">۱۰۰</b></div>
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <div class="progress-text" id="progressText">۰٪ از هدف تکمیل شده</div>
+      <button class="tap" id="tap" aria-label="ثبت یک صلوات">
+        <strong>صلوات</strong><span>برای شمارش لمس کنید</span>
+      </button>
+      <div class="controls">
+        <button class="btn" id="minus">− یک عدد</button>
+        <button class="btn primary" id="plus">+ یک عدد</button>
+        <button class="btn danger" id="reset">شروع مجدد</button>
+      </div>
+    </div>
+
+    <div class="settings">
+      <h2 class="section-title">تنظیم هدف شمارش</h2>
+      <div class="goal-buttons">
+        <button class="goal-btn" data-goal="10">۱۰ صلوات</button>
+        <button class="goal-btn active" data-goal="100">۱۰۰ صلوات</button>
+        <button class="goal-btn" data-goal="1000">۱۰۰۰ صلوات</button>
+      </div>
+      <div class="custom">
+        <input id="customGoal" type="number" min="1" max="10000000" inputmode="numeric" placeholder="هدف دلخواه (مثلاً ۵۰۰)">
+        <button class="btn" id="setCustom">ثبت هدف</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="remaining">۱۰۰</b><span>مانده تا هدف</span></div>
+        <div class="stat"><b id="sessions">۰</b><span>تعداد تکمیل هدف</span></div>
+      </div>
+    </div>
+    <div class="footer">اطلاعات شمارش به‌صورت خودکار در همین مرورگر ذخیره می‌شود.</div>
+  </section>
+</main>
+<div class="toast" id="toast"></div>
+<script>
+const $ = id => document.getElementById(id);
+const fa = n => Number(n).toLocaleString('fa-IR');
+let state = {count:0, goal:100, sessions:0};
+try { const saved = JSON.parse(localStorage.getItem('salavatCounterV1')); if(saved && Number.isFinite(saved.count) && Number.isFinite(saved.goal)) state = {...state,...saved}; } catch(e) {}
+function save(){ localStorage.setItem('salavatCounterV1', JSON.stringify(state)); }
+function render(){
+  $('count').textContent=fa(state.count); $('goalLabel').textContent=fa(state.goal);
+  const pct=Math.min(100, state.count/state.goal*100);
+  $('bar').style.width=pct+'%'; $('progressText').textContent=fa(Math.floor(pct))+'٪ از هدف تکمیل شده';
+  $('remaining').textContent=fa(Math.max(0,state.goal-state.count)); $('sessions').textContent=fa(state.sessions);
+  document.querySelectorAll('.goal-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.goal)===state.goal));
+}
+function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.classList.remove('show'),1800)}
+function add(){state.count++; if(state.count>0 && state.count%state.goal===0){state.sessions++;toast('آفرین! به هدف این نوبت رسیدید.')} save();render();}
+$('tap').addEventListener('click',add); $('plus').addEventListener('click',add);
+$('minus').addEventListener('click',()=>{if(state.count>0){state.count--;save();render();}});
+$('reset').addEventListener('click',()=>{if(confirm('شمارش فعلی از صفر شروع شود؟')){state.count=0;save();render();toast('شمارش از نو آغاز شد.')}});
+document.querySelectorAll('.goal-btn').forEach(b=>b.addEventListener('click',()=>{state.goal=Number(b.dataset.goal);save();render();toast('هدف شمارش تغییر کرد.');}));
+$('setCustom').addEventListener('click',()=>{const n=Number($('customGoal').value);if(!Number.isInteger(n)||n<1||n>10000000){toast('لطفاً عددی بین ۱ تا ۱۰٬۰۰۰٬۰۰۰ وارد کنید.');return;}state.goal=n;save();render();$('customGoal').value='';toast('هدف دلخواه ثبت شد.');});
+render();
+
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', e=>{e.preventDefault();deferredPrompt=e;showInstall();});
+function showInstall(){if(!$('install')){const b=document.createElement('button');b.id='install';b.className='btn primary';b.textContent='＋ نصب برنامه';b.style.width='100%';b.style.marginTop='12px';document.querySelector('.settings').appendChild(b);b.onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;b.remove();}else toast('از منوی مرورگر گزینه Add to Home Screen را بزنید.');};}}
+if('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+if(window.matchMedia('(display-mode: standalone)').matches) {}
+</script>
+</body>
+</html>
